@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { addTask,updateTask } from "../../Reducer/Task/taskSlice";
+import { addTask, updateTask } from "../../Reducer/Task/taskSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/store";
 import { v4 as uuid } from "uuid"
 
 import { useNavigate, useParams } from "react-router-dom"
+
+import "../css/taskForm.css"
 
 
 
@@ -33,18 +35,18 @@ function TaskForm() {
     // funcion para  actualizar el estado local  
     const handleChange = (even: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
 
-        setTask({...task,[even.target.name]:even.target.value})
+        setTask({ ...task, [even.target.name]: even.target.value })
     }
 
 
     const handleSumit = (even: React.FormEvent<HTMLFormElement>) => {
         even.preventDefault();
 
-        if(params.id){
+        if (params.id) {
             dispatch(updateTask(task))
             navige("/")
-        }else{
-           
+        } else {
+
             dispatch(addTask({
                 // copiamos el task que recimos  y le agreamos un id 
                 ...task,
@@ -53,7 +55,7 @@ function TaskForm() {
             navige("/")
         }
 
-        
+
     }
 
     // cada vez que cargemos el componete
@@ -68,14 +70,18 @@ function TaskForm() {
             }
         }
 
-    },[])
+    }, [])
     return (
-        <form action="" onSubmit={handleSumit}>
-            <input  name="title"type="text" placeholder="title" onChange={handleChange} value={task.title}/>
-            <textarea name="description" placeholder="description" onChange={handleChange} value={task.description}></textarea>
-            <button>Guardar</button>
+        <div  className="container_form">
+            <h1 className="barra"> </h1>
+            <form className="form" action="" onSubmit={handleSumit}>
+            <h3 className="title_h3"> Create Task</h3>
+                <input name="title" type="text" placeholder="title" onChange={handleChange} value={task.title} />
+                <textarea name="description" placeholder="description" onChange={handleChange} value={task.description}></textarea>
+                <button className="button">Guardar</button>
+            </form>
 
-        </form>
+        </div>
     )
 }
 

@@ -18,22 +18,22 @@ function TaskList() {
 
     return (
         <div className="container_listas">
-            <header>
-                <h1>{task.length}</h1>
-                {/* estiqueta que retireciona el create task */}
-                <Link to={"create_task"}>
+            <header className="header">
+                <Link className="create_task" to={"create_task"}>
                     Create Task
                 </Link>
-
+                {/* estiqueta que redireciona el create task */}
             </header>
-
+            <h1 className="title"> Num OF Task {task.length}</h1>
             {task.map(task => (
                 // la llave unica es para que no de un error
                 <div className="container_list" key={task.id}>
-                    <h3>{task.title}</h3>
-                    <p>{task.description}</p>
-                    <button onClick={() => handleDelete(task.id)}>Delete</button>
-                    <Link to={`/edit_task/${task.id}`}> Editar</Link>
+                    <h3 className="list_h3">{task.title}</h3>
+                    <p className="list_p">{task.description}</p>
+                    <div className="botones">
+                    <button className="button red" onClick={() => handleDelete(task.id)}>Delete</button>
+                    <Link className="button" to={`/edit_task/${task.id}`}> Editar</Link>
+                    </div>
                 </div>
             ))}
         </div>
